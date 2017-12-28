@@ -1,0 +1,24 @@
+#include <sys/types.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int fd;
+    size_t size;
+    char *string;
+    if ((fd = open("myfile", O_RDONLY, 0666)) < 0) {
+        printf("Can\'t open the file\n");
+        exit(-1);
+    }
+    size = read(fd, string, 14);
+    if (size < 14) {
+        printf("Can\'t read the file\n");
+        exit(-1);
+    }
+    printf("%s\n", string);
+    if (close(fd) < 0) {
+        printf("Can\'t close the file\n");
+    }
+    return 0;
+}
